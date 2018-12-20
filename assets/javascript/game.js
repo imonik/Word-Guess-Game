@@ -5,8 +5,9 @@ var wonGames = 0;
 var foundLettersIndex = [];
 var usedLetters = [];
 var maskedString = "";
+var _gameInProgress = false;
 
-function selectAWord(){
+function startGame() {
 	var randomIndex = Math.floor((Math.random() * 10));
 	currentWord = words[randomIndex];
 	maxAttempts = currentWord.length-1 + 4;
@@ -18,35 +19,32 @@ function selectAWord(){
 	document.getElementById("hiddenWord").innerHTML = maskedString;
 	document.getElementById("remainingAttemps").innerHTML = `Remaining attemps: ${maxAttempts}`;
 	document.getElementById("message").innerHTML ="";
+
+	_gameInProgress = true;
 }
 
 window.addEventListener('keydown', function(event) {
   switch (event.keyCode) {
     case 13: // start
-      selectAWord();
-    break;
-
-    case 38: // Exit
-      //Game.player.moveUp();
-    break;
-
-    case 39: // Restart
-      //Game.player.moveRight();
-    break;
-
+    	if (!_gameInProgress) {
+      		startGame();
+    	}
+    	break;
     default:
-      checkForLetter(event.key,event.keyCode);
-    break;
+		checkForLetter(event.key,event.keyCode);
+    	break;
   }
 }, false);
 
 function checkForLetter(letter, code) {
-	if(!(code >= 97 && code <= 122 ) && !(code >= 65 && code <= 90) ) {
+	//if (!(code >= 97 && code <= 122 ) && !(code >= 65 && code <= 90) ) { // [a-z] or [A-Z]
+	if (!(code >= 65 && code <= 90)) { // A to Z non-case sensitive
 		return;
 	}
 
 	if (maxAttempts == 0) {
 		document.getElementById("message").innerHTML ="You have reached all your attemps";
+		_gameInProgress = false;
 		return;
 	}
 
@@ -68,7 +66,7 @@ function hasBeenUsed(letter){
 	}
 }
 
-function getAllOcurrencesOfLetter(letter){
+function getAllOcurrencesOfLetter(letter) {
 	//console.log(`Letter to find is: ${a}`);   
 	for (var i = 0; i < currentWord.length; i++) {
 		if (currentWord[i] == letter){
@@ -79,13 +77,13 @@ function getAllOcurrencesOfLetter(letter){
 				document.getElementById("wins").innerHTML = `Wins: ${wonGames}`;
 				document.getElementById("message").innerHTML ="YOU WON!";
 				clearAll();
-				window.setTimeout(selectAWord, 5000);
+				window.setTimeout(startGame, 5000);
 			}
 		}
 	}
 }
 
-function replaceFoundLetters(){
+function replaceFoundLetters() {
 	var replacedWord = maskedString.trim().split(" ");
 
 	for (var i = 0; i < replacedWord.length; i++) {
@@ -101,8 +99,7 @@ function replaceFoundLetters(){
 	document.getElementById("usedLetters").innerHTML = usedLetters;
 }
 
-function clearAll()
-{
+function clearAll() {
 	currentWord = "";
 	maxAttempts = 0;
 	foundLettersIndex = [];
