@@ -1,4 +1,4 @@
-var words = ["awkward a", "Banjo a", "Cat a", "Machine a", "Cake a", "Land a", "Camp a", "air a", "Battle a", "Starbucks a" ];
+var words = ["awkward a", "banjo a", "cat a", "machine a", "cake a", "land a", "camp a", "air a", "battle a", "starbucks a" ];
 var currentWord = "";
 var maxAttempts = 0;
 var wonGames = 0;
@@ -9,7 +9,7 @@ var maskedString = "";
 function selectAWord(){
 	var randomIndex = Math.floor((Math.random() * 10));
 	currentWord = words[randomIndex];
-	maxAttempts = currentWord.length + 5;
+	maxAttempts = currentWord.length-1 + 4;
 
 	for (var i = 0; i < currentWord.length; i++) {
 		currentWord[i] == " " ? maskedString += "&nbsp " : maskedString += "_ ";
@@ -72,13 +72,14 @@ function getAllOcurrencesOfLetter(letter){
 	//console.log(`Letter to find is: ${a}`);   
 	for (var i = 0; i < currentWord.length; i++) {
 		if (currentWord[i] == letter){
-			
 			foundLettersIndex.push(i);
 			if (currentWord.replace(" ", "").length == foundLettersIndex.length) {
 				wonGames++;
+				document.getElementById("imgWins").src= `./assets/images/muffin${wonGames}.png`;
 				document.getElementById("wins").innerHTML = `Wins: ${wonGames}`;
+				document.getElementById("message").innerHTML ="YOU WON!";
 				clearAll();
-				selectAWord();
+				window.setTimeout(selectAWord, 5000);
 			}
 		}
 	}
@@ -110,4 +111,5 @@ function clearAll()
 	document.getElementById("hiddenWord").innerHTML = maskedString;
 	document.getElementById("usedLetters").innerHTML = usedLetters;
 	document.getElementById("remainingAttemps").innerHTML = `Remaining attemps: ${maxAttempts}`;
+	document.getElementById("message").innerHTML ="";
 }

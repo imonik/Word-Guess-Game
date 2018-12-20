@@ -1,0 +1,33 @@
+body {
+        background: repeating-linear-gradient(
+        90deg,
+      #d1fff4,
+      #d1fff4 35px,
+      #ffd1dc 35px,
+      #ffd1dc 45px
+    );
+    font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+header {
+    border: solid 3px pink;
+    background: white;
+    border-radius: 10px;
+}
+
+header h1 {
+    text-align: center;
+    color: #4E2E28;
+    font-weigth : bold;
+    font-size: 48px;
+}
+
+main {
+    margin-top: 40px;
+     border: solid 3px pink;
+    background: white;
+    border-radius: 10px;
+    text-align:center;
+    font-size:28px;
+}
+}
