@@ -4,27 +4,39 @@
 	<title>Word Game</title>
 	<script type="text/javascript" src="./assets/javascript/game.js"></script>
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
 </head>
 <body>
+
 	<header>
-		<h1>Guess the word</h1>
+		<h1>Guess Today's Menu</h1>
 	</header>
 	<main>
+		
 		<section>
-			<h1 id="message"></h1>
-
-			<div id="wins">Wins: 0</div>
-			<img id="imgWins" src="">
 			<br>
-			<div id="remainingAttemps">Remaining attemps: 0</div>
-			<br><div>Word to guess</div>
-			<br>
-
+			<div id="wins">Find today's menu to win a free muffin!</div>
+			<div style="font-family: 'Dancing Script', cursive; color:#4E2E28;">Today's Special is:</div>
 			<div id="hiddenWord"> </div>
 			<br>
-			<div>Used letters</div>
+			<img id="dish" src="">
+
+ 			<div class="ribbon"><span>Press enter to start!</span></div>
+			<h1 id="message"></h1>
+
+			<div id="wins"></div>
+			<img id="imgWins" src="">
 			<br>
-			<div id="usedLetters"></div>
+			<div id="remainingAttemps"></div>
+			<br>
+			<div id="imageAttemps"></div>
+			<br>
+			<div>You have used this letters:</div>
+			<section id="styled-letter" class="used-letters"></section>
+			<br>
+			
+
+			
 		</section>
 	</main>
 	
