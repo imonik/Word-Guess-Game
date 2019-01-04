@@ -141,8 +141,7 @@ function getAllOcurrencesOfLetter(letter) {
 				//agregar una animacion de ganar!
 				document.getElementById("dish").src= `${_imagePrefix}${_wordList[_currentPosition].image}`;
 				_gameInProgress = false;
-				//clearAll();
-				window.setTimeout(clearAll, 5000);
+				window.setTimeout(clearAll, 9000);
 			}
 		}
 	}
