@@ -21,6 +21,9 @@ var usedLetters = [];
 var maskedString = "";
 var _gameInProgress = false;
 var _currentPosition = "";
+var _founLetterSound;
+var _wrongLetterSound;
+var _winGameSound;
 
 function startGame() {
 	var randomIndex = Math.floor((Math.random() * 10));
@@ -93,7 +96,6 @@ function checkForLetter(letter, code) {
 	validateAttemps();
 
 	if (_currentWord.includes(letter)) {
-		//usedLetters.push(letter);
 		getAllOcurrencesOfLetter(letter);
 		replaceFoundLetters();
 	} else {
@@ -104,7 +106,6 @@ function checkForLetter(letter, code) {
 }
 
 function displayUsedLetters(){
-	//<div class="letterCircle">S</div>
 	var displayLetter = "";
 	for(var i = 0; i < usedLetters.length; i++) {
 		displayLetter += `<div class="letterCircle">${usedLetters[i]}</div>`
@@ -126,6 +127,7 @@ function hasBeenUsed(letter){
 }
 
 function getAllOcurrencesOfLetter(letter) {
+	_winGameSound = new Audio("./assets/sound/win.wav");
 	for (var i = 0; i < _currentWord.length; i++) {
 		if (_currentWord[i] == letter){
 			console.log("indexes " + _foundLettersIndex);
@@ -136,6 +138,7 @@ function getAllOcurrencesOfLetter(letter) {
 			
 			if (_currentWord.replace(" ", "").length == _foundLettersIndex.length) {
 				_wonGames++;
+				_winGameSound.play();
 				document.getElementById("imgWins").src= `./assets/images/muffin${_wonGames+2}.png`;
 				document.getElementById("message").innerHTML ="Congratulations! Here is you muffin. Try again to make it bigger!";
 				//agregar una animacion de ganar!
@@ -148,12 +151,14 @@ function getAllOcurrencesOfLetter(letter) {
 }
 
 function replaceFoundLetters() {
+	_founLetterSound =  new Audio("./assets/sound/show.wav");
 	var replacedWord = maskedString.trim().split(" ");
 
 	for (var i = 0; i < replacedWord.length; i++) {
 		for (var j = 0; j < _foundLettersIndex.length; j++) {
 			if (i == _foundLettersIndex[j]) {
 				console.log("letter " + _currentWord[_foundLettersIndex[j]]);
+				_founLetterSound.play();
 				replacedWord[i] = _currentWord[_foundLettersIndex[j]];
 				maskedString = replacedWord.join(" ");
 			}
