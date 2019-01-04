@@ -22,9 +22,7 @@ var maskedString = "";
 var _gameInProgress = false;
 var _currentPosition = "";
 
-
 function startGame() {
-	console.log("startGame");
 	var randomIndex = Math.floor((Math.random() * 10));
 	_currentPosition = randomIndex;
 	_currentWord = _wordList[randomIndex].special;
@@ -128,20 +126,23 @@ function hasBeenUsed(letter){
 }
 
 function getAllOcurrencesOfLetter(letter) {
-	//console.log(`Letter to find is: ${a}`);   
 	for (var i = 0; i < _currentWord.length; i++) {
 		if (_currentWord[i] == letter){
-			_foundLettersIndex.push(i);
+			console.log("indexes " + _foundLettersIndex);
+			
+			if(!_foundLettersIndex.includes(i)){
+				_foundLettersIndex.push(i);
+			}
+			
 			if (_currentWord.replace(" ", "").length == _foundLettersIndex.length) {
 				_wonGames++;
 				document.getElementById("imgWins").src= `./assets/images/muffin${_wonGames+2}.png`;
-				//document.getElementById("wins").innerHTML = `Wins: ${_wonGames}`;
 				document.getElementById("message").innerHTML ="Congratulations! Here is you muffin. Try again to make it bigger!";
 				//agregar una animacion de ganar!
 				document.getElementById("dish").src= `${_imagePrefix}${_wordList[_currentPosition].image}`;
 				_gameInProgress = false;
 				//clearAll();
-				//window.setTimeout(startGame, 5000);
+				window.setTimeout(clearAll, 5000);
 			}
 		}
 	}
@@ -153,6 +154,7 @@ function replaceFoundLetters() {
 	for (var i = 0; i < replacedWord.length; i++) {
 		for (var j = 0; j < _foundLettersIndex.length; j++) {
 			if (i == _foundLettersIndex[j]) {
+				console.log("letter " + _currentWord[_foundLettersIndex[j]]);
 				replacedWord[i] = _currentWord[_foundLettersIndex[j]];
 				maskedString = replacedWord.join(" ");
 			}
@@ -160,7 +162,6 @@ function replaceFoundLetters() {
 	}
 
 	document.getElementById("hiddenWord").innerHTML = maskedString;
-	//document.getElementById("usedLetters").innerHTML = usedLetters;
 	displayUsedLetters();
 }
 
@@ -177,4 +178,6 @@ function clearAll() {
 	document.getElementById("styled-letter").innerHTML = usedLetters;
 	//document.getElementById("remainingAttemps").innerHTML = `Remaining attemps: ${_remainingAttemps}`;
 	document.getElementById("message").innerHTML ="";
+	document.getElementById("imageAttemps").innerHTML ="";
+	document.getElementById("dish").src= "";
 }
