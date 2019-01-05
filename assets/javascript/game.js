@@ -16,6 +16,8 @@ var _imagePrefix = "./assets/images/";
 var _currentWord = "";
 var _remainingAttemps = 0;
 var _wonGames = 0;
+var _totalGames = 0;
+var _loseGames = 0;
 var _foundLettersIndex = [];
 var usedLetters = [];
 var maskedString = "";
@@ -40,7 +42,6 @@ function startGame() {
 	document.getElementById("hiddenWord").innerHTML = maskedString;
 	diplayCoffeeAttemps();
 	document.getElementById("message").innerHTML ="";
- 
 	_gameInProgress = true;
 }
 
@@ -82,7 +83,7 @@ window.addEventListener('keydown', function(event) {
 
 function validateAttemps() {
 	if (_remainingAttemps == 0) {
-		document.getElementById("message").innerHTML ="You have reached all your attemps";
+		document.getElementById("message").innerHTML ="You have reached all your attemps =(";
 		_failSound.play();
 		showWord();
 		_gameInProgress = false;
@@ -153,11 +154,16 @@ function getAllOcurrencesOfLetter(letter) {
 				_wonGames++;
 				_winGameSound.play();
 				var image = document.getElementById("imgWins");
-				image.src = `./assets/images/muffin${_wonGames}.png`;
-				document.getElementById("message").innerHTML ="Congratulations! Here is you muffin. Try again to make it bigger!";
+				if(_wonGames == 5){
+					image.src = `./assets/images/muffin5.png` 
+					document.getElementById("message").innerHTML ="You got our biggest muffin!";
+				}else {
+					image.src = `./assets/images/muffin${_wonGames}.png`;
+					document.getElementById("message").innerHTML ="Congratulations! Here is you muffin. Try again to make it bigger!";
+				}
+				
 				document.getElementById("dish").src= `${_imagePrefix}${_wordList[_currentPosition].image}`;
 				_gameInProgress = false;
-				//window.setTimeout(clearAll, 5000);
 				confeti();
 			}
 }
@@ -191,32 +197,33 @@ function clearAll() {
 	document.getElementById("message").innerHTML ="";
 	document.getElementById("imageAttemps").innerHTML ="";
 	document.getElementById("dish").src= "";
+	document.getElementById("confetti-wrapper").innerHTML = "";
 }
 
 function confeti(){
 	for(i=0; i<200; i++) {
-  // Random rotation
-  var randomRotation = Math.floor(Math.random() * 360);
-  // Random width & height between 0 and viewport
-  var randomWidth = Math.floor(Math.random() * Math.max(document.documentElement.clientWidth, window.innerWidth || 0));
-  var randomHeight =  Math.floor(Math.random() * Math.max(document.documentElement.clientHeight, window.innerHeight || 0));
-  
-  // Random animation-delay
-  var randomAnimationDelay = Math.floor(Math.random() * 10);
-  console.log(randomAnimationDelay)
+		// Random rotation
+		var randomRotation = Math.floor(Math.random() * 360);
+		// Random width & height between 0 and viewport
+		var randomWidth = Math.floor(Math.random() * Math.max(document.documentElement.clientWidth, window.innerWidth || 0));
+		var randomHeight =  Math.floor(Math.random() * Math.max(document.documentElement.clientHeight, window.innerHeight || 0));
 
-  // Random colors
-  var colors = ['#0CD977', '#FF1C1C', '#FF93DE', '#5767ED', '#FFC61C', '#8497B0']
-  var randomColor = colors[Math.floor(Math.random() * colors.length)];
+		// Random animation-delay
+		var randomAnimationDelay = Math.floor(Math.random() * 10);
+		console.log(randomAnimationDelay)
 
-  // Create confetti piece
-  var confetti = document.createElement('div');
-  confetti.className = 'confetti';
-  confetti.style.top=randomHeight + 'px';
-  confetti.style.left=randomWidth + 'px';
-  confetti.style.backgroundColor=randomColor;
-  confetti.style.transform='skew(15deg) rotate(' + randomRotation + 'deg)';
-  confetti.style.animationDelay=randomAnimationDelay + 's';
-  document.getElementById("confetti-wrapper").appendChild(confetti);
-}
+		// Random colors
+		var colors = ['#0CD977', '#FF1C1C', '#FF93DE', '#5767ED', '#FFC61C', '#8497B0']
+		var randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+		// Create confetti piece
+		var confetti = document.createElement('div');
+		confetti.className = 'confetti';
+		confetti.style.top=randomHeight + 'px';
+		confetti.style.left=randomWidth + 'px';
+		confetti.style.backgroundColor=randomColor;
+		confetti.style.transform='skew(15deg) rotate(' + randomRotation + 'deg)';
+		confetti.style.animationDelay=randomAnimationDelay + 's';
+		document.getElementById("confetti-wrapper").appendChild(confetti);
+	}
 }

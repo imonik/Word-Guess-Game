@@ -35,9 +35,15 @@ header h1 {
      font-size: 16px;
  }
 
+ .message{
+    font-family:'Amatic SC';/*'Dancing Script', cursive;*/  
+    color:#bae1ff;
+    font-size : 42px;
+ }
+
 main {
     margin-top: 40px;
-     border: solid 3px pink;
+    border: solid 3px pink;
     background: white;
     border-radius: 10px;
     text-align:center;
@@ -49,13 +55,14 @@ main {
 .letterCircle {
     float:left;
     border-radius: 50%;
-    behavior: url(PIE.htc);
+    behavior: url(PIE.htc) important!;
   /* remove if you don't care about IE8 */
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     /*padding: -8px;*/
     background: #fff;
     border: 2px solid #666;
+    border-rigth: 5px;
     color: #666;
     text-align: center;
     font: 32px Arial, sans-serif;
@@ -89,7 +96,7 @@ footer {
   }
 
 .wrapper {
-  display: flex;
+/*   display: flex; */
   justify-content: center;
   align-items: center;
   height: 100vh;

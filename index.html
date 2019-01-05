@@ -8,21 +8,24 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-	<header>
+	<header class="container">
 		<h1>Monik's Cafe</h1>
 	</header>
+	<div  class="wrapper">
+		<div id="confetti-wrapper">
+			<div class="row"></div>
+	</div>
 	<main>	
-		<section class="wrapper">
-			<div id="confetti-wrapper">
-			<div class="row">
-				<div class="col-md-12"> press enter to start</div>
+		<section class="container">
+			<div class="row  mt-1"> 
+				<div class="col-md-12 title"> (press enter to start)</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">
 					<div class="title">FIND THE WORD TO WIN!</div>
 					<div id="wins">
 						<img id="imgWins" src="">
-					</div>
+					</div> 
 				</div>
 				<div class="col-md-4"> 
 					<div class="special">Today's Special is:</div>
@@ -36,7 +39,7 @@
 					<section id="styled-letter" class="used-letters title"></section>
 				</div>
 			</div>
-			<h1 id="message"></h1>
+			<h1 id="message" class="message"></h1>
 			</div>
 		</section>
 	</main>
