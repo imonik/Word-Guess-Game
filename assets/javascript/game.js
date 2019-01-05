@@ -15,7 +15,7 @@ var _wordList = [
 var _imagePrefix = "./assets/images/";
 var _currentWord = "";
 var _remainingAttemps = 0;
-var _wonGames = 0;
+var _wonGames = 5;
 var _totalGames = 0;
 var _loseGames = 0;
 var _foundLettersIndex = [];
@@ -154,7 +154,7 @@ function getAllOcurrencesOfLetter(letter) {
 				_wonGames++;
 				_winGameSound.play();
 				var image = document.getElementById("imgWins");
-				if(_wonGames == 5){
+				if(_wonGames <= 6){
 					image.src = `./assets/images/muffin5.png` 
 					document.getElementById("message").innerHTML ="You got our biggest muffin!";
 				}else {
