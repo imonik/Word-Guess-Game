@@ -28,7 +28,7 @@ var _failSound = new Audio("./assets/sound/fail.wav");
 
 
 function startGame() {
-	var randomIndex = 8;//Math.floor((Math.random() * 10));
+	var randomIndex = Math.floor((Math.random() * 10));
 	_currentPosition = randomIndex;
 	_currentWord = _wordList[randomIndex].special;
 	_remainingAttemps = _currentWord.length + 4;

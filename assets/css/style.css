@@ -23,10 +23,10 @@ header h1 {
     font-size: 48px;
     text-shadow: 2px 2px 4px pink;
 }
- #wins {
+ .title {
      font-family : OCR A Std, monospace;
      color: #9998ff;
-     text-shadow: 2px 2px 4px #a4a4a4;
+     font-size: 16px;
  }
 main {
     margin-top: 40px;
@@ -41,17 +41,17 @@ main {
 }
 .letterCircle {
     float:left;
-  border-radius: 50%;
-  behavior: url(PIE.htc);
+    border-radius: 50%;
+    behavior: url(PIE.htc);
   /* remove if you don't care about IE8 */
-  width: 36px;
-  height: 36px;
-  padding: 8px;
-  background: #fff;
-  border: 2px solid #666;
-  color: #666;
-  text-align: center;
-  font: 32px Arial, sans-serif;
+    width: 36px;
+    height: 36px;
+    /*padding: -8px;*/
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    font: 32px Arial, sans-serif;
 }
 
 .used-letters {
@@ -123,7 +123,8 @@ footer {
   background: linear-gradient(#2989D8 0%, #2989D8 100%);
   box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
   position: absolute;
-  top: 19px; left: -21px;
+  top: 19px;
+  left: -21px;
 }
 .ribbon span::before {
   content: "";
