@@ -28,7 +28,7 @@ var _wrongLetterSound = new Audio("./assets/sound/wrong.wav");
 var _winGameSound = new Audio("./assets/sound/win.wav");
 var _failSound = new Audio("./assets/sound/fail.wav");
 
-function detectmob() { 
+function detectMobileDevice() { 
  if( navigator.userAgent.match(/Android/i)
  || navigator.userAgent.match(/webOS/i)
  || navigator.userAgent.match(/iPhone/i)
@@ -46,14 +46,14 @@ function detectmob() {
 
 	var className = document.getElementsByClassName("letter-button");
 	for (var i = 0; i < className.length; i++) {
-    className[i].addEventListener('click', alertClick, false);
-}
-
+    	className[i].addEventListener('click', letterClick, false);
+	}
   }
 }
 
-detectmob();
-function alertClick(){
+detectMobileDevice();
+
+function letterClick(){
 	var id = parseInt(this.id);
 	var letter = this.textContent.toLowerCase();
 	switch (id) {
@@ -70,8 +70,6 @@ function alertClick(){
     	break;
   }
 }
-
-
 
 function startGame() {
 	var randomIndex = Math.floor((Math.random() * 10));
