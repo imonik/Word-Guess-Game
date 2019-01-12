@@ -48,12 +48,13 @@ header h1 {
    margin-left: 15px;
    width: 55px;
    margin-top: 10px;
+   text-align: center;
   }
 
 #13 {
    width: 110px;
  }
- 
+
  #hint{
    font-size: 18px;
    color: #ff392e;
