@@ -1,16 +1,16 @@
 var _words = ["cake", "croissant", "chocolate", "cinnamon bun", "danish pastry", "soup", "camp a", "mocha", "pie", "coffee" ];
 var _wordList = [
-{special: "broiled lobster", description : "Lorem Ipsum", image : "lobster.png"},
-{special: "noodles", description : "Lorem Ipsum", image : "noodles.png"},
-{special: "pancakes", description : "Lorem Ipsum", image : "pancakes.png"},
-{special: "pizza four seasons", description : "Lorem Ipsum", image : "pizza.png"},
-{special: "ramen", description : "Lorem Ipsum", image : "ramen.png"},
-{special: "rice", description : "Lorem Ipsum", image : "rice.png"},
-{special: "salad", description : "Lorem Ipsum", image : "salad.png"},
-{special: "onion soup", description : "Lorem Ipsum", image : "soup.png"},
-{special: "spaghetti and meatballs", description : "Lorem Ipsum", image : "spaguetti.png"},
-{special: "tacos", description : "Lorem Ipsum", image : "tacos.png"}, 
-{special: "buttered shrimp", description : "Lorem Ipsum", image : "shrimp.png"}
+{special: "broiled lobster",   description : "a dish made from a large marine crustaceans with big claws", image : "lobster.png"},
+{special: "noodles", 		   description : "a stape food in many cultures made from unelevated dough. Can be streched, extruded or rolled flat.", image : "noodles.png"},
+{special: "pancakes",		   description : "a flat cake thin and round.", image : "pancakes.png"},
+{special: "pizza four seasons", description : "italian dish prepared in four sections with diverse ingredients.", image : "pizza.png"},
+{special: "ramen",			   description : "quick-cooking noodles, typically served in a broth with meat and vegetables.", image : "ramen.png"},
+{special: "rice", 			   description : "a swamp grass which is widely cultivate as a source of food, specially in Asia.", image : "rice.png"},
+{special: "salad", 			   description : "a cold dish of varoius mixtrure of raw or cooked vegetables", image : "salad.png"},
+{special: "onion soup", 	   description : "a french traditional dish often served with croutons and cheese on top.", image : "soup.png"},
+{special: "spaghetti and meatballs", description : "an Italian-American dish made of pasta, sauce and meat.", image : "spaguetti.png"},
+{special: "tacos", 			   description : "a Mexican famous dish made wth tortillas", image : "tacos.png"}, 
+{special: "buttered shrimp",   description : "a dish made of small crustaceans", image : "shrimp.png"}
   ];
 var _imagePrefix = "./assets/images/";
 var _currentWord = "";
@@ -28,6 +28,50 @@ var _wrongLetterSound = new Audio("./assets/sound/wrong.wav");
 var _winGameSound = new Audio("./assets/sound/win.wav");
 var _failSound = new Audio("./assets/sound/fail.wav");
 
+function detectmob() { 
+ if( navigator.userAgent.match(/Android/i)
+ || navigator.userAgent.match(/webOS/i)
+ || navigator.userAgent.match(/iPhone/i)
+ || navigator.userAgent.match(/iPad/i)
+ || navigator.userAgent.match(/iPod/i)
+ || navigator.userAgent.match(/BlackBerry/i)
+ || navigator.userAgent.match(/Windows Phone/i)
+ ){
+ 	var buttons = "";
+    for (var i = 65; i <= 90; i++) {
+		buttons += '<button id="'+ i +'"" class="letter-button">' + String.fromCharCode(i) + '</button>'
+	}
+	buttons += `<button class="letter-button" id="13">ENTER</button>`
+	document.getElementById("buttons").innerHTML = buttons;
+
+	var className = document.getElementsByClassName("letter-button");
+	for (var i = 0; i < className.length; i++) {
+    className[i].addEventListener('click', alertClick, false);
+}
+
+  }
+}
+
+detectmob();
+function alertClick(){
+	var id = parseInt(this.id);
+	var letter = this.textContent.toLowerCase();
+	switch (id) {
+    case 13: // start
+    	if (!_gameInProgress) {
+     		clearAll();
+      		startGame();
+    	}
+    	break;
+    default:
+    	if (_gameInProgress) {
+      		checkForLetter(letter,id);
+    	}
+    	break;
+  }
+}
+
+
 
 function startGame() {
 	var randomIndex = Math.floor((Math.random() * 10));
@@ -40,6 +84,7 @@ function startGame() {
 	}
 
 	document.getElementById("hiddenWord").innerHTML = maskedString;
+	document.getElementById("hint").innerHTML =  _wordList[randomIndex].description;
 	diplayCoffeeAttemps();
 	document.getElementById("message").innerHTML ="";
 	_gameInProgress = true;
@@ -139,14 +184,6 @@ function getAllOcurrencesOfLetter(letter) {
 			if(!_foundLettersIndex.includes(i)){
 				_foundLettersIndex.push(i);
 			}
-			 console.log( "indexes after push " + _foundLettersIndex );
-			
-
-			console.log( "currentword " + _currentWord.replace(" ", ""));
-			console.log( "found indexes " +  _foundLettersIndex.length);
-
-
-			
 		}
 	}
 
@@ -154,7 +191,7 @@ function getAllOcurrencesOfLetter(letter) {
 				_wonGames++;
 				_winGameSound.play();
 				var image = document.getElementById("imgWins");
-				if(_wonGames <= 6){
+				if(_wonGames >= 6){
 					image.src = `./assets/images/muffin5.png` 
 					document.getElementById("message").innerHTML ="You got our biggest muffin!";
 				}else {
